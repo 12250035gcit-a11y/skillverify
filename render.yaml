@@ -5,7 +5,6 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /jobs
-    port: 8080
     envVars:
       - key: DB_HOST
         fromDatabase:
