@@ -1,0 +1,11 @@
+.env
+*.env
+.env.*
+!.env.example
+
+# Build output
+server
+
+# OS
+.DS_Store
+Thumbs.db

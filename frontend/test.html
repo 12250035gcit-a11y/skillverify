@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test — SkillVerify</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-offset">
+
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-gem">SV</div>Skill<b>Verify</b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="test.html" class="active">Test</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="nav-auth" id="navGuest">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-auth" id="navUser" style="display:none">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()" style="color:var(--red);background:var(--red-dim);padding:6px 14px;border-radius:7px">Logout</a>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-veil" id="navVeil"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="test.html" class="active">Test</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+  <div class="drawer-auth" id="drawerGuest">
+    <a href="login.html">Login</a>
+    <a href="register.html" class="d-cta">Get Started →</a>
+  </div>
+  <div class="drawer-auth" id="drawerUser" style="display:none">
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="#" onclick="logout()" class="d-logout">Logout</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     EMPLOYER VIEW
+════════════════════════════════════════════════════════════ -->
+<div id="employerView" style="display:none">
+  <div class="page-hd">
+    <div class="wrap">
+      <h1>My Posted Jobs</h1>
+      <p>View applicants and manage screening questions for each job</p>
+    </div>
+  </div>
+
+  <div class="test-body">
+    <div class="wrap" style="max-width:860px">
+
+      <!-- Jobs list -->
+      <div class="dcard" style="margin-bottom:24px">
+        <div class="dcard-hd" style="display:flex;align-items:center;gap:12px">
+          <div class="dcard-title">Your Jobs</div>
+          <a href="jobs.html" class="btn btn-primary btn-sm" style="margin-left:auto">+ Post a Job</a>
+        </div>
+        <div id="empJobsList"><p style="opacity:.5;padding:16px 0">Loading…</p></div>
+      </div>
+
+      <!-- Applicants panel (hidden until a job is clicked) -->
+      <div class="dcard" id="empApplicantsCard" style="display:none;margin-bottom:24px">
+        <div class="dcard-hd" style="display:flex;align-items:center;gap:10px">
+          <div class="dcard-title" id="empApplicantsTitle">Applicants</div>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="empCloseApplicants()">✕ Close</button>
+        </div>
+        <div id="empApplicantsList"></div>
+      </div>
+
+      <!-- Questions panel (hidden until manage-questions is clicked) -->
+      <div class="dcard" id="empQuestionsCard" style="display:none">
+        <div class="dcard-hd" style="display:flex;align-items:center;gap:10px">
+          <div class="dcard-title" id="empQuestionsTitle">Screening Questions</div>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="empCloseQuestions()">✕ Close</button>
+        </div>
+        <p style="opacity:.6;font-size:.85rem;margin-bottom:20px">
+          Add up to 10 multiple-choice questions. Applicants will answer these when they apply.
+          Tick the radio button next to the correct answer for each question.
+        </p>
+        <div id="empQuestionsList" style="display:flex;flex-direction:column;gap:18px"></div>
+        <div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" id="empAddQBtn" onclick="empAddQuestion()">+ Add Question</button>
+          <button class="btn btn-primary btn-sm" onclick="empSaveQuestions()">Save Questions</button>
+          <span id="empQSavedMsg" style="color:var(--green,#22c55e);font-size:.85rem;display:none">✓ Saved!</span>
+        </div>
+
+        <!-- Applicant test scores — shown below the question editor -->
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border)">
+          <div style="font-weight:600;font-size:.92rem;margin-bottom:14px">Applicant Test Results</div>
+          <div id="empApplicantScores"><p style="opacity:.45;font-size:.85rem">Select a job to view results.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FREELANCER VIEW  — job-specific screening tests
+════════════════════════════════════════════════════════════ -->
+<div id="freelancerView" style="display:none">
+  <div class="page-hd">
+    <div class="wrap">
+      <h1>My Job Tests</h1>
+      <p>Take screening tests only for jobs you have applied to</p>
+    </div>
+  </div>
+
+  <div class="test-body">
+    <div class="wrap" style="max-width:720px">
+
+      <!-- Applied-jobs list -->
+      <div id="myJobTestList"></div>
+
+      <!-- Question form — shown after selecting a job -->
+      <div id="jobTestForm" style="display:none">
+        <div class="dcard" style="margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <h3 id="jobTestTitle" style="flex:1;margin:0;font-size:1rem;font-weight:600"></h3>
+            <button class="btn btn-ghost btn-sm" onclick="backToJobList()">← Back to list</button>
+          </div>
+        </div>
+        <div class="test-list" id="jobQuestionList"></div>
+      </div>
+
+      <!-- Result -->
+      <div id="jobTestResult" style="display:none"></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Redirect fallback for guests -->
+<div id="guestView" style="display:none">
+  <div class="page-hd"><div class="wrap"><h1>Sign in to continue</h1></div></div>
+  <div class="test-body"><div class="wrap" style="text-align:center;padding:40px 0">
+    <p style="opacity:.6;margin-bottom:20px">You need to be logged in to access this page.</p>
+    <a href="login.html" class="btn btn-primary">Login →</a>
+  </div></div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo"><div class="nav-logo-gem" style="width:26px;height:26px;font-size:.65rem">SV</div> Skill<b>Verify</b></div>
+    <p class="foot-copy">© 2026 SkillVerify</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

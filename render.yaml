@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: skillverify-app
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /jobs
+    port: 8080
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: skillverify-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: skillverify-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: skillverify-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: skillverify-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: skillverify-db
+          property: database
+      - key: DB_SSLMODE
+        value: require
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: skillverify-db
+    plan: free
+    databaseName: freelance_platform
+    user: skillverify

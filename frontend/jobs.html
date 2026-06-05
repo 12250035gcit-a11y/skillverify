@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs — SkillVerify</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-offset">
+
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-gem">SV</div>Skill<b>Verify</b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jobs.html" class="active">Jobs</a></li>
+      <li><a href="test.html">Test</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="nav-auth" id="navGuest">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-auth" id="navUser" style="display:none">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()" style="color:var(--red);background:var(--red-dim);padding:6px 14px;border-radius:7px">Logout</a>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-veil" id="navVeil"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html" class="active">Jobs</a></li>
+    <li><a href="test.html">Test</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+  <div class="drawer-auth" id="drawerGuest">
+    <a href="login.html">Login</a>
+    <a href="register.html" class="d-cta">Get Started →</a>
+  </div>
+  <div class="drawer-auth" id="drawerUser" style="display:none">
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="#" onclick="logout()" class="d-logout">Logout</a>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-hd">
+  <div class="wrap page-hd-row">
+    <div>
+      <h1>Job Board</h1>
+      <p>Browse verified opportunities and apply with your skill badge</p>
+    </div>
+    <button id="postToggle" class="btn btn-primary" style="display:none">
+      + Post a Job
+    </button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="jobs-body">
+  <div class="wrap">
+
+    <!-- Post job panel (employers only) -->
+    <div class="post-panel" id="postPanel">
+      <div class="post-panel-header">
+        <h3>Post a New Job</h3>
+        <p class="post-panel-sub">Fill in all details to attract the best verified talent</p>
+      </div>
+
+      <!-- Step indicators -->
+      <div class="post-steps">
+        <div class="post-step active" id="step1ind">
+          <div class="post-step-num">1</div>
+          <div class="post-step-label">Basic Info</div>
+        </div>
+        <div class="post-step-line"></div>
+        <div class="post-step" id="step2ind">
+          <div class="post-step-num">2</div>
+          <div class="post-step-label">Job Details</div>
+        </div>
+        <div class="post-step-line"></div>
+        <div class="post-step" id="step3ind">
+          <div class="post-step-num">3</div>
+          <div class="post-step-label">Requirements</div>
+        </div>
+      </div>
+
+      <form id="createJobForm" novalidate>
+
+        <!-- STEP 1: Basic Info -->
+        <div class="form-step" id="formStep1">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="jobTitle">Job Title <span class="req">*</span></label>
+              <input type="text" id="jobTitle" placeholder="e.g. React Developer for SaaS project" required>
+              <div class="field-hint">Be specific — good titles get 3× more applications</div>
+            </div>
+            <div class="form-group">
+              <label for="jobCategory">Category <span class="req">*</span></label>
+              <select id="jobCategory" required>
+                <option value="">Select a category…</option>
+                <option value="development">Software Development</option>
+                <option value="design">Design &amp; Creative</option>
+                <option value="writing">Writing &amp; Content</option>
+                <option value="marketing">Marketing &amp; SEO</option>
+                <option value="data">Data &amp; Analytics</option>
+                <option value="video">Video &amp; Animation</option>
+                <option value="finance">Finance &amp; Accounting</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="jobDescription">Job Description <span class="req">*</span></label>
+            <textarea id="jobDescription" rows="6" placeholder="Describe the role, key responsibilities, what a typical day looks like, and why someone would love working on this project…" required></textarea>
+            <div class="field-hint char-counter"><span id="descCount">0</span> / 2000 characters</div>
+          </div>
+
+          <div class="form-nav">
+            <div></div>
+            <button type="button" class="btn btn-primary" onclick="goStep(2)">Next: Job Details →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Job Details -->
+        <div class="form-step" id="formStep2" style="display:none">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="jobBudget">Budget / Rate</label>
+              <div class="input-prefix-wrap">
+                <span class="input-prefix">$</span>
+                <input type="text" id="jobBudget" placeholder="e.g. 500 or 25/hr">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="jobBudgetType">Budget Type</label>
+              <select id="jobBudgetType">
+                <option value="fixed">Fixed Price</option>
+                <option value="hourly">Hourly Rate</option>
+                <option value="negotiable">Negotiable</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="jobDuration">Project Duration</label>
+              <select id="jobDuration">
+                <option value="">Select duration…</option>
+                <option value="less_week">Less than a week</option>
+                <option value="1_4_weeks">1–4 weeks</option>
+                <option value="1_3_months">1–3 months</option>
+                <option value="3_6_months">3–6 months</option>
+                <option value="ongoing">Ongoing / Long-term</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="jobDeadline">Application Deadline</label>
+              <input type="date" id="jobDeadline">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="jobType">Job Type</label>
+              <select id="jobType">
+                <option value="remote">Remote</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onsite">On-site</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="jobLocation">Location (if applicable)</label>
+              <input type="text" id="jobLocation" placeholder="e.g. New York, NY or Worldwide">
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+            <button type="button" class="btn btn-primary" onclick="goStep(3)">Next: Requirements →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Requirements -->
+        <div class="form-step" id="formStep3" style="display:none">
+          <div class="form-group">
+            <label for="jobSkills">Required Skills</label>
+            <input type="text" id="jobSkillsInput" placeholder="Type a skill and press Enter (e.g. React, Node.js, Figma)">
+            <div class="skills-tags" id="skillsTags"></div>
+            <input type="hidden" id="jobSkills">
+            <div class="field-hint">Add up to 10 skills. Press Enter or comma to add each one.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="jobExperience">Experience Level</label>
+            <div class="exp-grid">
+              <label class="exp-card on">
+                <input type="radio" name="experience" value="entry" checked>
+                <div class="exp-ico">🌱</div>
+                <div class="exp-lbl">Entry</div>
+                <div class="exp-sub">0–2 yrs</div>
+              </label>
+              <label class="exp-card">
+                <input type="radio" name="experience" value="mid">
+                <div class="exp-ico">⚡</div>
+                <div class="exp-lbl">Mid-level</div>
+                <div class="exp-sub">2–5 yrs</div>
+              </label>
+              <label class="exp-card">
+                <input type="radio" name="experience" value="senior">
+                <div class="exp-ico">🏆</div>
+                <div class="exp-lbl">Senior</div>
+                <div class="exp-sub">5+ yrs</div>
+              </label>
+              <label class="exp-card">
+                <input type="radio" name="experience" value="any">
+                <div class="exp-ico">🤝</div>
+                <div class="exp-lbl">Any level</div>
+                <div class="exp-sub">Open to all</div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="jobRequirements">Additional Requirements</label>
+            <textarea id="jobRequirements" rows="4" placeholder="Portfolio required? Specific tools? Time zone preferences? Any other must-haves…"></textarea>
+          </div>
+
+          <!-- Preview summary -->
+          <div class="job-preview" id="jobPreview" style="display:none">
+            <div class="preview-label">Preview</div>
+            <div class="preview-title" id="previewTitle">—</div>
+            <div class="preview-meta" id="previewMeta"></div>
+            <div class="preview-desc" id="previewDesc">—</div>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+            <div style="display:flex;gap:10px">
+              <button type="button" class="btn btn-ghost" onclick="previewJob()">Preview</button>
+              <button type="submit" class="btn btn-primary" id="publishJobBtn">Publish Job</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="jobs-toolbar">
+      <div class="search-box">
+        <span class="search-ico">🔍</span>
+        <input type="text" id="jobSearch" placeholder="Search by title or keyword…">
+      </div>
+      <span class="jobs-count" id="jobCount"></span>
+    </div>
+
+    <!-- Job list -->
+    <div class="job-list" id="jobList">
+      <div class="job-card" style="opacity:.4;pointer-events:none">
+        <div>
+          <div class="skel" style="height:17px;width:55%;margin-bottom:10px"></div>
+          <div class="skel" style="height:13px;width:88%;margin-bottom:6px"></div>
+          <div class="skel" style="height:13px;width:70%"></div>
+        </div>
+        <div></div>
+      </div>
+      <div class="job-card" style="opacity:.22;pointer-events:none">
+        <div>
+          <div class="skel" style="height:17px;width:45%;margin-bottom:10px"></div>
+          <div class="skel" style="height:13px;width:82%;margin-bottom:6px"></div>
+          <div class="skel" style="height:13px;width:60%"></div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo"><div class="nav-logo-gem" style="width:26px;height:26px;font-size:.65rem">SV</div> Skill<b>Verify</b></div>
+    <p class="foot-copy">© 2026 SkillVerify</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

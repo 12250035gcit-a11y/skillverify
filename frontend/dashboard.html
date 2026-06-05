@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — SkillVerify</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-offset">
+
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-gem">SV</div>Skill<b>Verify</b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li id="navTestLink"><a href="test.html">Test</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    </ul>
+    <div class="nav-auth" id="navGuest">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-auth" id="navUser" style="display:none">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()" style="color:var(--red);background:var(--red-dim);padding:6px 14px;border-radius:7px">Logout</a>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-veil" id="navVeil"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li id="drawerTestLink"><a href="test.html">Test</a></li>
+    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+  </ul>
+  <div class="drawer-auth" id="drawerGuest">
+    <a href="login.html">Login</a>
+    <a href="register.html" class="d-cta">Get Started →</a>
+  </div>
+  <div class="drawer-auth" id="drawerUser" style="display:none">
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="#" onclick="logout()" class="d-logout">Logout</a>
+  </div>
+</div>
+
+<div class="page-hd">
+  <div class="wrap">
+    <h1>My Dashboard</h1>
+    <p>Manage your profile, skills, and opportunities</p>
+  </div>
+</div>
+
+<div class="dash-body">
+  <div class="wrap">
+    <div class="dash-grid">
+
+      <aside>
+        <div class="profile-card">
+          <div class="avatar" id="avatarInitial">?</div>
+          <div>
+            <div class="p-email" id="userEmail">—</div>
+            <div class="p-role"  id="userRole">—</div>
+          </div>
+          <div class="p-stats" id="freelancerStats">
+            <div class="pstat">
+              <div class="pstat-n" id="userScore">—</div>
+              <div class="pstat-l">Score</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-n" id="verifyBadge">—</div>
+              <div class="pstat-l">Status</div>
+            </div>
+          </div>
+          <a href="test.html" class="btn btn-primary btn-full btn-sm" id="takeTestBtn">Take Skill Test</a>
+          <a href="jobs.html" class="btn btn-primary btn-full btn-sm" id="postJobBtn" style="display:none">Post a Job</a>
+        </div>
+      </aside>
+
+      <main class="dash-main">
+
+        <!-- Quick Actions: Freelancer -->
+        <div class="dcard" id="qaFreelancer">
+          <div class="dcard-hd">
+            <div class="dcard-title">Quick Actions</div>
+          </div>
+          <div class="act-grid">
+            <a href="test.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><polyline points="9 12 11 14 15 10"/></svg>
+              </div>
+              <div><div class="act-lbl">My Tests</div><div class="act-sub">Job screening assessments</div></div>
+            </a>
+            <a href="jobs.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+              </div>
+              <div><div class="act-lbl">Browse Jobs</div><div class="act-sub">Find your next project</div></div>
+            </a>
+            <a href="index.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div><div class="act-lbl">Home</div><div class="act-sub">Return to landing page</div></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Actions: Employer -->
+        <div class="dcard" id="qaEmployer" style="display:none">
+          <div class="dcard-hd">
+            <div class="dcard-title">Quick Actions</div>
+          </div>
+          <div class="act-grid">
+            <a href="test.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div><div class="act-lbl">My Jobs &amp; Applicants</div><div class="act-sub">View and manage applicants</div></div>
+            </a>
+            <a href="jobs.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div><div class="act-lbl">Post a Job</div><div class="act-sub">Find verified talent</div></div>
+            </a>
+            <a href="index.html" class="act-btn">
+              <div class="act-ico-sv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div><div class="act-lbl">Home</div><div class="act-sub">Return to landing page</div></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Account Details -->
+        <div class="dcard">
+          <div class="dcard-hd">
+            <div class="dcard-title">Account Details</div>
+          </div>
+          <div class="detail-row"><span class="dk">Name</span><span class="dv" id="detailName">—</span></div>
+          <div class="detail-row"><span class="dk">Phone</span><span class="dv" id="detailPhone">—</span></div>
+          <div class="detail-row"><span class="dk">Email</span><span class="dv" id="detailEmail">—</span></div>
+          <div class="detail-row"><span class="dk">Role</span><span class="dv" id="detailRole">—</span></div>
+          <div class="detail-row" id="detailVerifyRow"><span class="dk">Verification</span><span class="dv" id="detailVerify">—</span></div>
+          <div class="detail-row" id="detailScoreRow"><span class="dk">Skill Score</span><span class="dv" style="color:var(--blue)" id="detailScore">—</span></div>
+        </div>
+
+        <!-- Tip: Freelancer -->
+        <div class="tip-card" id="tipFreelancer">
+          <div class="tip-ico-sv">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="tip-title">Boost your profile</div>
+            <p class="tip-text">Complete screening tests for jobs you apply to. Your scores are shown to employers when they review applicants.</p>
+            <a href="test.html" class="btn btn-primary btn-sm">View my tests</a>
+          </div>
+        </div>
+
+        <!-- Tip: Employer -->
+        <div class="tip-card" id="tipEmployer" style="display:none">
+          <div class="tip-ico-sv">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="tip-title">Screen with precision</div>
+            <p class="tip-text">Add multiple-choice questions to your job listings. Applicant scores are recorded automatically so you can compare candidates.</p>
+            <a href="jobs.html" class="btn btn-primary btn-sm">Post a job</a>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo"><div class="nav-logo-gem" style="width:26px;height:26px;font-size:.65rem">SV</div> Skill<b>Verify</b></div>
+    <p class="foot-copy">© 2026 SkillVerify</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

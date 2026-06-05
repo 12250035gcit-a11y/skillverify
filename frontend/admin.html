@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — SkillVerify</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-offset">
+
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-gem">SV</div>Skill<b>Verify</b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="test.html">Test</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+    </ul>
+    <div class="nav-auth" id="navGuest">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-auth" id="navUser" style="display:none">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()" style="color:var(--red);background:var(--red-dim);padding:6px 14px;border-radius:7px">Logout</a>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-veil" id="navVeil"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="test.html">Test</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="admin.html" class="active">Admin</a></li>
+  </ul>
+  <div class="drawer-auth" id="drawerGuest">
+    <a href="login.html">Login</a>
+    <a href="register.html" class="d-cta">Get Started →</a>
+  </div>
+  <div class="drawer-auth" id="drawerUser" style="display:none">
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="#" onclick="logout()" class="d-logout">Logout</a>
+  </div>
+</div>
+
+<!-- ═══════════════════ ADMIN VIEW ═══════════════════════ -->
+<div id="adminView" style="display:none">
+
+  <div class="page-hd">
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <h1>Admin Panel</h1>
+          <p>Manage users, verify freelancers, and oversee platform activity</p>
+        </div>
+        <span style="margin-left:auto;padding:4px 12px;border-radius:20px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:var(--blue);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-body">
+    <div class="wrap" style="max-width:1040px">
+
+      <!-- Stats row -->
+      <div id="adminStatCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:14px;margin-bottom:28px">
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--indigo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="aStat0">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Total Users</div>
+        </div>
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--blue)" id="aStat1">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Freelancers</div>
+        </div>
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--indigo)" id="aStat2">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Employers</div>
+        </div>
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--green)" id="aStat3">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Verified</div>
+        </div>
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--t1)" id="aStat4">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Open Jobs</div>
+        </div>
+        <div class="dcard" style="padding:18px 20px;text-align:center">
+          <div style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--t2)" id="aStat5">—</div>
+          <div style="font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-top:4px;font-weight:600">Applications</div>
+        </div>
+      </div>
+
+      <!-- User Management -->
+      <div class="dcard" style="margin-bottom:24px">
+        <div class="dcard-hd" style="flex-wrap:wrap;gap:10px">
+          <div class="dcard-title">User Management</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;align-items:center">
+            <button class="btn btn-ghost btn-sm admin-filter-btn active" onclick="adminFilterUsers('all',this)">All</button>
+            <button class="btn btn-ghost btn-sm admin-filter-btn" onclick="adminFilterUsers('freelancer',this)">Freelancers</button>
+            <button class="btn btn-ghost btn-sm admin-filter-btn" onclick="adminFilterUsers('employer',this)">Employers</button>
+            <input id="adminUserSearch" type="text" placeholder="Search by name or email…"
+              oninput="adminSearchUsers(this.value)"
+              style="padding:6px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg3);color:var(--t1);font-size:.82rem;outline:none;width:210px">
+          </div>
+        </div>
+        <div id="adminUsersList"><p style="opacity:.5;padding:12px 0">Loading users…</p></div>
+      </div>
+
+      <!-- Jobs overview -->
+      <div class="dcard">
+        <div class="dcard-hd">
+          <div class="dcard-title">All Jobs</div>
+          <span id="adminJobCount" style="font-size:.8rem;color:var(--t3)"></span>
+        </div>
+        <div id="adminJobsList"><p style="opacity:.5;padding:12px 0">Loading jobs…</p></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Access denied -->
+<div id="adminDenied" style="display:none">
+  <div class="page-hd"><div class="wrap"><h1>Access Denied</h1></div></div>
+  <div class="test-body"><div class="wrap" style="text-align:center;padding:60px 0">
+    <p style="opacity:.6;margin-bottom:20px">You must be logged in as an admin to view this page.</p>
+    <a href="login.html" class="btn btn-primary">Login →</a>
+  </div></div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo"><div class="nav-logo-gem" style="width:26px;height:26px;font-size:.65rem">SV</div> Skill<b>Verify</b></div>
+    <p class="foot-copy">© 2026 SkillVerify</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go build *)",
+      "Bash(psql --version)",
+      "Bash(docker --version)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -c \"\\\\l\")"
+    ]
+  }
+}

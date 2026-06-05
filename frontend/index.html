@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillVerify — Verified Freelance Talent</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-offset">
+
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-gem">SV</div>Skill<b>Verify</b>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="test.html">Test</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="nav-auth" id="navGuest">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-auth" id="navUser" style="display:none">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()" style="color:var(--red);background:var(--red-dim);padding:6px 14px;border-radius:7px">Logout</a>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-veil" id="navVeil"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="test.html">Test</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+  <div class="drawer-auth" id="drawerGuest">
+    <a href="login.html">Login</a>
+    <a href="register.html" class="d-cta">Get Started</a>
+  </div>
+  <div class="drawer-auth" id="drawerUser" style="display:none">
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="#" onclick="logout()" class="d-logout">Logout</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap hero-content">
+    <div class="hero-pill">
+      <span class="hero-dot"></span> Skills-first hiring platform
+    </div>
+    <h1>Get hired for what<br>you <mark>actually know</mark></h1>
+    <p class="hero-sub">Take a verified skills test, earn a trusted badge, and connect with employers who value talent over resumes.</p>
+    <div class="hero-cta">
+      <a href="register.html" class="btn btn-primary btn-lg">Start for free</a>
+      <a href="jobs.html" class="btn btn-secondary btn-lg">Browse jobs</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-n" id="statJobs">—</div>
+        <div class="stat-l">Open Jobs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n" id="statFreelancers">—</div>
+        <div class="stat-l">Freelancers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n" id="statEmployers">—</div>
+        <div class="stat-l">Employers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="sh c">
+      <div class="sec-eyebrow">Why SkillVerify</div>
+      <h2 class="sec-h">Built for meritocracy</h2>
+      <p class="sec-sub">Skills are the currency of opportunity — not connections, not pedigree.</p>
+    </div>
+    <div class="f-grid">
+      <div class="f-card">
+        <div class="f-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <h3>Skill Verification</h3>
+        <p>Take expert-crafted assessments and earn a verified badge employers actually trust.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Trusted Marketplace</h3>
+        <p>Verified freelancers apply with credentials front and center. Employers get quality talent, fast.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3>Secure by Default</h3>
+        <p>JWT authentication, encrypted credentials, and role-based access keep every account protected.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sh c">
+      <div class="sec-eyebrow">Process</div>
+      <h2 class="sec-h">How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">Step 01</div>
+        <h3>Create Account</h3>
+        <p>Sign up as a freelancer or employer in under a minute with your name, email, and phone number.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 02</div>
+        <h3>Apply to Jobs</h3>
+        <p>Browse open positions and apply directly. Employers may include a screening test with their listing.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 03</div>
+        <h3>Take the Test</h3>
+        <p>Complete the job-specific screening assessment attached to roles you have applied for.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 04</div>
+        <h3>Get Hired</h3>
+        <p>Employers review verified scores and move applicants through shortlisting to offer stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT JOBS -->
+<section class="section">
+  <div class="wrap">
+    <div class="sh" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="sec-eyebrow">Live listings</div>
+        <h2 class="sec-h" style="margin-bottom:0">Recent job openings</h2>
+      </div>
+      <a href="jobs.html" class="btn btn-ghost btn-sm">View all jobs</a>
+    </div>
+    <div id="homeJobList" class="home-job-list">
+      <div class="home-job-skel"></div>
+      <div class="home-job-skel"></div>
+      <div class="home-job-skel"></div>
+    </div>
+    <div id="homeJobEmpty" style="display:none;text-align:center;padding:48px 0;color:var(--t3)">
+      No open jobs yet. <a href="register.html" style="color:var(--blue)">Post the first one.</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2 class="sec-h">Ready to prove your skills?</h2>
+    <p class="sec-sub">Join verified freelancers and employers already on the platform.</p>
+    <div class="cta-btns">
+      <a href="register.html" class="btn btn-primary btn-lg">Create free account</a>
+      <a href="jobs.html" class="btn btn-secondary btn-lg">View job board</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo"><div class="nav-logo-gem" style="width:26px;height:26px;font-size:.65rem">SV</div> Skill<b>Verify</b></div>
+    <p class="foot-copy">© 2026 SkillVerify. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
